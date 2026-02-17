@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, NavLink, Link } from 'react-router-dom'
+import { HashRouter, Routes, Route, NavLink, Link } from 'react-router-dom'
 import UrlTool from './pages/UrlTool'
 
 const TOOLS = [
@@ -46,13 +46,13 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/cc-toolkit/">
+    <HashRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/url" element={<UrlTool />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
