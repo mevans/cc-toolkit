@@ -74,6 +74,8 @@ const TRANSFORMS: TransformDef[] = [
           parsed.hostname = to
           parsed.port = ''
         }
+        const isLocal = parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1'
+        if (isLocal) parsed.protocol = 'http:'
         return parsed.toString()
       } catch {
         return null
