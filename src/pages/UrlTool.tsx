@@ -54,7 +54,7 @@ const TRANSFORMS: TransformDef[] = [
         </select>
         <input
           type="text"
-          placeholder="hostname"
+          placeholder="hostname or hostname:port"
           value={config.to ?? ''}
           onChange={e => onChange('to', e.target.value)}
           className="px-2 py-1 border border-gray-300 rounded text-sm font-mono w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -65,7 +65,15 @@ const TRANSFORMS: TransformDef[] = [
       if (!to) return null
       try {
         const parsed = new URL(url)
-        parsed.hostname = to
+        const lastColon = to.lastIndexOf(':')
+        const hasPort = lastColon !== -1 && !to.includes('[') // exclude IPv6
+        if (hasPort) {
+          parsed.hostname = to.slice(0, lastColon)
+          parsed.port = to.slice(lastColon + 1)
+        } else {
+          parsed.hostname = to
+          parsed.port = ''
+        }
         return parsed.toString()
       } catch {
         return null
