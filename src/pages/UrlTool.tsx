@@ -279,12 +279,24 @@ export default function UrlTool() {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">Output</h3>
-            <button
-              onClick={handleCopyOutput}
-              className="text-xs text-blue-600 hover:text-blue-800 font-medium"
-            >
-              {copiedOutput ? 'Copied!' : 'Copy'}
-            </button>
+            <div className="flex items-center gap-3">
+              {output && isValidUrl(output) && (
+                <a
+                  href={output}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  Open
+                </a>
+              )}
+              <button
+                onClick={handleCopyOutput}
+                className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+              >
+                {copiedOutput ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
           </div>
           <textarea
             readOnly
